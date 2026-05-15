@@ -1,0 +1,35 @@
+# VITALIS AI — Healthcare triage demo
+
+Monorepo-style layout: **FastAPI** backend (`backend/`) and **Next.js** frontend (`frontend/`).
+
+## Quick start
+
+1. **Backend** — copy `backend/.env.example` to `backend/.env`, add `GEMINI_API_KEY`, then:
+
+   ```bash
+   cd backend
+   python -m venv .venv
+   .venv\Scripts\activate
+   pip install -r requirements.txt
+   uvicorn main:app --reload --port 8000
+   ```
+
+2. **Frontend** — copy `frontend/.env.example` to `frontend/.env.local`, set `NEXT_PUBLIC_API_URL=http://localhost:8000`, then:
+
+   ```bash
+   cd frontend
+   npm install
+   npm run dev
+   ```
+
+## WhatsApp consent (Twilio)
+
+Server-side WhatsApp sharing requires explicit **YES** consent before the report is sent. Setup, environment variables, API reference, ngrok, and test steps are in **[docs/WHATSAPP_CONSENT.md](docs/WHATSAPP_CONSENT.md)**.
+
+- `POST /api/whatsapp/send-consent` — sends the consent template.
+- `POST /api/whatsapp/webhook` — Twilio inbound replies (signature-verified).
+- `GET /api/whatsapp/consent-status` — frontend polling.
+
+## Disclaimer
+
+Educational demo — not a substitute for licensed medical care. See in-app disclaimer.
